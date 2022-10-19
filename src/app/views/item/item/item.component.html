@@ -1,1 +1,124 @@
-<p>item works!</p>
+<div class="container" style="padding-top: 2rem;padding-bottom: 2rem;">
+  <div class="row" *ngIf="isLoaded">
+    <div class="col-4 col-md-12">
+      <ul class="list-group">
+        <li class="list-group-item">TenderForm id : {{ tenderForm.id }}</li>
+        <li class="list-group-item">TenderForm Name : {{ tenderForm.name }}</li>
+      </ul>
+    </div>
+  </div>
+  <br />
+  <button
+  pButton
+  pRipple
+  type="button"
+  [routerLink]="['/tender']"
+  label="Back"
+  style="float: right;"
+  icon="pi pi-arrow-left"
+  class="p-button p-button-success p-button-sm"
+></button>
+  <app-item-create [tenderFormId]="tenderFormId"></app-item-create>
+  <br /><br />
+  <div class="row">
+    <div class="col-4 col-md-12">
+      <p-table [value]="tenderFormItems" sortMode="multiple">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="Id">#</th>
+            <th pSortableColumn="Name">Name</th>
+            <th pSortableColumn="Description">Description</th>
+            <th pSortableColumn="Quantity">Quantity</th>
+            <th pSortableColumn="Rate">View</th>
+            <th pSortableColumn="Rate">Rate</th>
+            <th pSortableColumn="Settings" colspan="2">Settings</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+          <tr scope="row">
+            <td>{{ rowIndex + 1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>
+              <button
+                [routerLink]="['/item/view/', tenderFormId, item.id]"
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-eye"
+                class="p-button-rounded p-button-primary p-button-sm"
+              ></button>
+            </td>
+            <td>
+              <app-item-rate [itemId]="item.id" [tenderFormId]="tenderFormId">
+              </app-item-rate>
+            </td>
+            <td>
+              <app-item-update
+                [tenderFormId]="tenderFormId"
+                [itemId]="item.id"
+              ></app-item-update>
+
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger"
+                (click)="showConfirm(item.id)"
+                style="margin-left: 1rem"
+              ></button>
+              <div style="text-align: center">
+                <p-toast
+                  position="bottom-center"
+                  key="c"
+                  (onClose)="onReject()"
+                  [baseZIndex]="5000"
+                >
+                  <ng-template let-message pTemplate="message">
+                    <div class="p-flex p-flex-column" style="flex: 1">
+                      <div class="p-text-center">
+                        <i
+                          class="pi pi-exclamation-triangle"
+                          style="font-size: 3rem"
+                        ></i>
+                        <h4>{{ message.summary }}</h4>
+                        <p>{{ message.detail }}</p>
+                      </div>
+                      <div class="row">
+                        <div class="col-8 offset-2">
+                          <button
+                            style="margin-right: 0.5rem; width: 40%"
+                            type="button"
+                            pButton
+                            (click)="delete(message.id)"
+                            label="Yes"
+                            class="p-button-success"
+                          ></button>
+                          <button
+                            style="margin-left: 0.5rem; width: 40%"
+                            type="button"
+                            pButton
+                            (click)="onReject()"
+                            label="No"
+                            class="p-button-secondary"
+                          ></button>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-toast>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr scope="row">
+            <td colspan="8" style="text-align: center;">No Data</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

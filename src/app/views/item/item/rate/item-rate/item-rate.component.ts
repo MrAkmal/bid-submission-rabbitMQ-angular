@@ -1,22 +1,25 @@
-import { ItemCreateDTO } from 'src/app/interface/item-interface';
-import { ItemComponent } from './../../item.component';
-import { ItemAPI } from 'src/app/api/item/item-api';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { ItemAPI } from 'src/app/api/item/item-api';
+import { ItemCreateDTO, ItemRateCreateDTO } from 'src/app/interface/item-interface';
+import { ItemComponent } from '../../item.component';
 
 @Component({
-  selector: 'app-item-create',
-  templateUrl: './item-create.component.html',
-  styleUrls: ['./item-create.component.css']
+  selector: 'app-item-rate',
+  templateUrl: './item-rate.component.html',
+  styleUrls: ['./item-rate.component.css']
 })
-export class ItemCreateComponent implements OnInit {
+export class ItemRateComponent implements OnInit {
+
+  @Input()
+  itemId!: number;
 
   @Input()
   tenderFormId!: number;
 
 
-  itemForm!: FormGroup;
+  rateForm!: FormGroup;
   isSaving: boolean = false;
 
   constructor(
@@ -43,17 +46,15 @@ export class ItemCreateComponent implements OnInit {
   save() {
 
     this.isSaving = true;
-    const val = this.itemForm.value;
+    const val = this.rateForm.value;
 
-    if (val.name && val.description && this.tenderFormId && val.quantity > 0) {
-      let dto: ItemCreateDTO = {
-        name: val.name,
-        description: val.description,
-        quantity: val.quantity,
-        tenderFormId: this.tenderFormId
+    if (val.rate) {
+      let dto: ItemRateCreateDTO = {
+        itemId: this.itemId,
+        rate: val.rate
       }
 
-      this.itemApi.create(dto)
+      this.itemApi.rateItem(dto)
         .then(res => {
           console.log(res);
           this.displayModal = false;
@@ -88,8 +89,7 @@ export class ItemCreateComponent implements OnInit {
       this.messageService.add({
         severity: "error",
         summary: "Please fill form",
-        detail: (!val.name ? "Required Name" : ' ')
-          + (!val.description ? " Required Description" : ' ') + (val.quantity == 0 ? " Required Quantity" : '')
+        detail: (!val.name ? "Required Rate" : ' ')
       });
     }
 
@@ -97,13 +97,9 @@ export class ItemCreateComponent implements OnInit {
 
 
   initializeForm() {
-    this.itemForm = this.formBuilder.group({
+    this.rateForm = this.formBuilder.group({
 
-      name: ['', Validators.required],
-
-      description: ['', Validators.required],
-
-      quantity: [0, Validators.required]
+      rate: [0, Validators.required]
 
     });
   }

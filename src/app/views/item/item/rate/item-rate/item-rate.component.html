@@ -3,55 +3,26 @@
   pButton
   pRipple
   type="button"
-  label="Add"
   icon="pi pi-plus"
-  class="p-button p-button-primary p-button-sm"
+  class="p-button-rounded p-button-primary p-button-sm"
 ></button>
 <p-dialog
-  header="Item Create"
+  header="Item Rate"
   [(visible)]="displayModal"
   [modal]="true"
-  [style]="{ width: '60vw', height: '100vh' }"
+  [style]="{ width: '40vw', height: '45vh' }"
   [baseZIndex]="10000"
   [draggable]="false"
   [resizable]="false"
 >
-  <form [formGroup]="itemForm">
-    <br />
-    <div class="mb-3">
-      <div class="p-inputgroup">
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            formControlName="name"
-            type="text"
-            pInputText
-          />
-          <label for="float-input">Name</label>
-        </span>
-      </div>
-    </div>
-    <br />
-    <div class="mb-3">
-      <div class="p-inputgroup">
-        <span class="p-float-label">
-          <input
-            id="float-input"
-            formControlName="description"
-            type="text"
-            pInputText
-          />
-          <label for="float-input">Description</label>
-        </span>
-      </div>
-    </div>
+  <form [formGroup]="rateForm">
     <br />
     <div class="mb-3">
       <div class="p-inputgroup">
         <span class="p-float-label">
           <p-inputNumber
             [showButtons]="true"
-            formControlName="quantity"
+            formControlName="rate"
             buttonLayout="horizontal"
             inputId="horizontal"
             spinnerMode="horizontal"
@@ -63,7 +34,7 @@
             decrementButtonIcon="pi pi-minus"
           >
           </p-inputNumber>
-          <label for="float-input">Quantity</label>
+          <label for="float-input">Rate</label>
         </span>
       </div>
     </div>
@@ -74,8 +45,8 @@
       pButton
       pRipple
       type="button"
-      label="Save"
-      icon="pi pi-save"
+      label="Rate"
+      icon="pi pi-upload"
       (click)="save()"
       class="p-button p-button-primary p-button-sm"
       [loading]="isSaving"
