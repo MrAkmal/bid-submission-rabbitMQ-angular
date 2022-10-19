@@ -35,6 +35,13 @@ import { ItemViewComponent } from './views/item/item/view/item-view/item-view.co
 import { ItemCreateComponent } from './views/item/item/create/item-create/item-create.component';
 import { ItemUpdateComponent } from './views/item/item/update/item-update/item-update.component';
 import { AuthComponent } from './views/auth/auth/auth.component';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastModule} from 'primeng/toast';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { MessagesModule } from 'primeng/messages';
 
 
 @NgModule({
@@ -58,14 +65,20 @@ import { AuthComponent } from './views/auth/auth/auth.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-
-
+    ConfirmDialogModule,
+    MessagesModule,
+    ToastModule,
+    DialogModule,
+    InputTextModule,
+    FormsModule,
     MenubarModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     TableModule,
     ButtonModule
 
   ],
-  providers: [],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

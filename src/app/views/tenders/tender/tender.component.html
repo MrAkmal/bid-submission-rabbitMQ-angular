@@ -1,4 +1,9 @@
+<p-toast></p-toast>
+
 <div class="container" style="padding-top: 2rem">
+
+  <app-tender-create></app-tender-create>
+
   <br /><br />
   <div class="row">
     <div class="col-4 col-md-12">
@@ -16,14 +21,72 @@
             <td>{{ rowIndex + 1 }}</td>
             <td>{{ tender.description }}</td>
             <td>
-              <button
-              [routerLink]="['/tender/view', tender.id]"
-                pButton
-                pRipple
-                type="button"
-                icon="pi pi-eye"
-                class="p-button-rounded p-button-primary p-button-sm"
-              ></button>
+              <app-tender-view [tender]="tender"></app-tender-view>
+            </td>
+            <td>
+              <app-tender-update [tender]="tender"></app-tender-update>
+              
+               <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
+               (click)="showdeleteModal(tender.id)"></button>
+             
+               <div style="text-align: center">
+                <p-toast
+                  position="bottom-center"
+                  key="c"
+                  (onClose)="no()"
+                  [baseZIndex]="5000"
+                >
+                  <ng-template let-message pTemplate="message">
+                    <div class="p-flex p-flex-column" style="flex: 1">
+                      <div class="p-text-center">
+                        <i
+                          class="pi pi-exclamation-triangle"
+                          style="font-size: 3rem"
+                        ></i>
+                        <h4>{{ message.summary }}</h4>
+                        <p>{{ message.detail }}</p>
+                      </div>
+                      <div class="row">
+                        <div class="col-8 offset-2">
+                          <button
+                            style="margin-right: 0.5rem; width: 40%"
+                            type="button"
+                            pButton
+                            (click)="delete(message.id)"
+                            label="Yes"
+                            class="p-button-success"
+                          ></button>
+                          <button
+                            style="margin-left: 0.5rem; width: 40%"
+                            type="button"
+                            pButton
+                            (click)="no()"
+                            label="No"
+                            class="p-button-secondary"
+                          ></button>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-toast>
+              </div>
+
+
+<!--               
+                <div> Are you sure ?</div>
+
+                <ng-template let-message pTemplate="message">
+                  <button pButton pRipple type="button" (click)="delete(message.id)" label="Yes" icon="pi pi-save"
+                    class="p-button p-button-danger p-button-sm"></button>
+                    <button pButton pRipple type="button" (click)="no()" label="No" icon="pi pi-save"
+                    class="p-button p-button-primary p-button-sm"></button>
+                </ng-template>
+              </p-dialog> -->
+
+
+
+
+
             </td>
           </tr>
         </ng-template>

@@ -33,7 +33,7 @@ export class TenderAPI {
 
     let userId = localStorage.getItem("userId");
 
-    return await axios.post(this.baseUrl + '?userId=' + userId, dto);
+    return await axios.post(this.baseUrl + '?userId=' + 1, dto);
 
   }
 
@@ -42,7 +42,7 @@ export class TenderAPI {
 
     let userId = localStorage.getItem("userId");
 
-    return await axios.put(this.baseUrl + '?userId=' + userId, dto);
+    return await axios.put(this.baseUrl + '?userId=' + 1, dto);
 
   }
 
@@ -51,7 +51,7 @@ export class TenderAPI {
 
     let userId = localStorage.getItem("userId");
 
-    return await axios.delete(this.baseUrl + +'/' + tenderId + '?userId=' + userId);
+    return await axios.delete(this.baseUrl +'/' + tenderId + '?userId=' + 1);
 
   }
 
