@@ -19,7 +19,9 @@ export class ItemUpdateComponent implements OnInit {
   @Input()
   tenderFormId!: number;
 
-  tenderId: number=1;
+
+  @Input()
+  tenderId!: number;
 
   @Input()
   itemId!: number;
@@ -39,6 +41,7 @@ export class ItemUpdateComponent implements OnInit {
   name!: string;
   description!: string;
   quantity!: number;
+  tenderFormIds:number=0;
 
   isUpdating: boolean = false;
   isLoaded: boolean = false;
@@ -50,7 +53,7 @@ export class ItemUpdateComponent implements OnInit {
     private itemComponent: ItemComponent,
     private tenderFormApi: TenderFormAPI,
     private messageService: MessageService) {
-    this.initializeForm();
+      this.initializeForm();
   }
 
   ngOnInit(): void {
@@ -62,7 +65,6 @@ export class ItemUpdateComponent implements OnInit {
 
   displayModal!: boolean;
   showModalDialog() {
-    this.initializeForm();
     this.displayModal = true;
   }
 
@@ -78,6 +80,7 @@ export class ItemUpdateComponent implements OnInit {
         this.description = this.item.description;
         this.quantity = this.item.quantity;
         this.isLoaded = true;
+        this.tenderFormIds=this.tenderFormId;
 
       }).catch(err => {
         console.log(err);
@@ -105,7 +108,7 @@ export class ItemUpdateComponent implements OnInit {
     this.isUpdating = true;
     const val = this.itemForm.value;
 
-    if (val.name && val.description && this.tenderFormId && val.quantity > 0) {
+    if (val.name && val.description && val.tenderFormId && val.quantity > 0) {
 
       let dto: ItemUpdateDTO = {
         name: val.name,
@@ -125,7 +128,6 @@ export class ItemUpdateComponent implements OnInit {
             detail: res.data.message
           });
           this.isUpdating = false;
-          this.initializeForm();
           this.itemComponent.getAllByTenderFormId(this.tenderFormId);
         }).catch(err => {
           console.log(err);
@@ -166,7 +168,7 @@ export class ItemUpdateComponent implements OnInit {
 
       quantity: [0, Validators.required],
 
-      tenderFormId: [this.tenderFormId, Validators.required]
+      tenderFormId: ['', Validators.required]
 
     });
   }

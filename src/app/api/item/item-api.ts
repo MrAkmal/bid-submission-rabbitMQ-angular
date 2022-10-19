@@ -105,7 +105,7 @@ export class ItemAPI {
   async rateItem(dto: ItemRateCreateDTO) {
 
     // let userId = localStorage.getItem("userId");
-    let userId = 2;
+    let userId = 1;
 
     return await axios.post(this.baseUrl + '/rate/?userId=' + userId, dto);
 

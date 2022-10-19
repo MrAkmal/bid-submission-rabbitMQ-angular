@@ -12,7 +12,7 @@
   pButton
   pRipple
   type="button"
-  [routerLink]="['/tender']"
+  routerLink="/tender/view/{{tenderId}}"
   label="Back"
   style="float: right;"
   icon="pi pi-arrow-left"
@@ -42,7 +42,7 @@
             <td>{{ item.quantity }}</td>
             <td>
               <button
-                [routerLink]="['/item/view/', tenderFormId, item.id]"
+                [routerLink]="['/item/view/', tenderId,tenderFormId, item.id]"
                 pButton
                 pRipple
                 type="button"
@@ -58,6 +58,7 @@
               <app-item-update
                 [tenderFormId]="tenderFormId"
                 [itemId]="item.id"
+                [tenderId]="tenderId"
               ></app-item-update>
 
               <button

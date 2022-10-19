@@ -73,12 +73,14 @@
     <div class="mb-3">
       <span class="p-float-label">
         <p-dropdown
-          inputId="dropdown"
-          formControlName="tenderFormId"
-          [autoDisplayFirst]="false"
+
           [options]="tenderForms"
           optionLabel="name"
+          [(ngModel)]="tenderFormId"
+          dataKey="id"
           optionValue="id"
+          formControlName="tenderFormId"
+
           [style]="{ width: '100%' }"
         >
         </p-dropdown>

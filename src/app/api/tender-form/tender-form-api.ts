@@ -1,3 +1,4 @@
+import { TenderFormCreateDTO, TenderFormUpdateDTO } from './../../interface/tender-form-interface';
 import axios from "axios";
 import { Injectable } from "@angular/core";
 
@@ -24,6 +25,35 @@ export class TenderFormAPI {
   async getById(tenderFormId: number) {
 
     return await axios.get(this.baseUrl + '/' + tenderFormId);
+
+  }
+
+
+  async create(dto: TenderFormCreateDTO) {
+
+    // let userId = localStorage.getItem("userId");
+    let userId = 1;
+
+    return await axios.post(this.baseUrl + '?userId=' + userId, dto);
+
+  }
+
+  async update(dto: TenderFormUpdateDTO) {
+
+    // let userId = localStorage.getItem("userId");
+    let userId = 1;
+
+    return await axios.put(this.baseUrl + '?userId=' + userId, dto);
+
+  }
+
+
+  async delete(tenderFormId: number) {
+
+    // let userId = localStorage.getItem("userId");
+    let userId = 1;
+
+    return await axios.put(this.baseUrl + '/' + tenderFormId + '?userId=' + userId);
 
   }
 

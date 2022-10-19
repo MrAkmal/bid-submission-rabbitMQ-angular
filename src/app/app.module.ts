@@ -21,6 +21,7 @@ import { ItemViewComponent } from './views/item/item/view/item-view/item-view.co
 import { ItemCreateComponent } from './views/item/item/create/item-create/item-create.component';
 import { ItemUpdateComponent } from './views/item/item/update/item-update/item-update.component';
 import { AuthComponent } from './views/auth/auth/auth.component';
+import { ItemRateComponent } from './views/item/item/rate/item-rate/item-rate.component';
 
 
 //primeNg
@@ -34,7 +35,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { ItemRateComponent } from './views/item/item/rate/item-rate/item-rate.component';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {TabViewModule} from 'primeng/tabview';
+
 
 @NgModule({
   declarations: [
@@ -70,7 +73,9 @@ import { ItemRateComponent } from './views/item/item/rate/item-rate/item-rate.co
     InputTextModule,
     DropdownModule,
     ToastModule,
-    InputNumberModule
+    InputNumberModule,
+    TabMenuModule,
+    TabViewModule
 
   ],
   providers: [ConfirmationService, MessageService],

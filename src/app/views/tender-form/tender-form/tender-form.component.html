@@ -1,1 +1,71 @@
-<p>tender-form works!</p>
+<div class="container" style="padding-top: 2rem; padding-bottom: 2rem">
+  <div class="row" *ngIf="isLoaded">
+    <div class="col-4 col-md-12">
+      <ul class="list-group">
+        <li class="list-group-item">Tender id : {{ tender.id }}</li>
+        <li class="list-group-item">
+          Tender Description : {{ tender.description }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br />
+  <button
+    pButton
+    pRipple
+    type="button"
+    [routerLink]="['/tender']"
+    label="Back"
+    style="float: right"
+    icon="pi pi-arrow-left"
+    class="p-button p-button-success p-button-sm"
+  ></button>
+  <app-tender-form-create [tenderId]="tenderId"></app-tender-form-create>
+  <br /><br />
+  <p-tabView>
+    <p-tabPanel header="TenderForms" [selected]="true">
+      <div class="row">
+        <div class="col-4 col-md-12">
+          <p-table [value]="tenderForms" sortMode="multiple">
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="Id">#</th>
+                <th pSortableColumn="Name">Name</th>
+                <th pSortableColumn="View">View</th>
+                <th pSortableColumn="Settings" colspan="2">Settings</th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-tenderForm
+              let-rowIndex="rowIndex"
+            >
+              <tr scope="row">
+                <td>{{ rowIndex + 1 }}</td>
+                <td>{{ tenderForm.name }}</td>
+                <td>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    routerLink="/tender/view/{{ tenderId }}/{{
+                      tenderForm.id
+                    }}/item"
+                    icon="pi pi-eye"
+                    class="p-button-rounded p-button-primary p-button-sm"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr scope="row">
+                <td colspan="5" style="text-align: center">No Data</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="TenderItems"> Content 2 </p-tabPanel>
+  </p-tabView>
+</div>

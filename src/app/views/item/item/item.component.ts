@@ -15,7 +15,9 @@ import { TenderFormAPI } from 'src/app/api/tender-form/tender-form-api';
 })
 export class ItemComponent implements OnInit {
 
-  tenderFormId: number = 1;
+  tenderId!:number;
+
+  tenderFormId!: number;
 
   isLoaded: boolean = false;
 
@@ -33,7 +35,8 @@ export class ItemComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-
+    this.tenderId = this.route.snapshot.params['tenderId'];
+    this.tenderFormId = this.route.snapshot.params['tenderFormId'];
     this.getAllByTenderFormId(this.tenderFormId);
     this.getTenderFormById(this.tenderFormId);
   }

@@ -14,6 +14,8 @@ export class ItemViewComponent implements OnInit {
 
   tenderFormId!: number;
 
+  tenderId!:number;
+
   itemId!: number;
 
   itemRates: ItemRateDetailDTO[] = []
@@ -38,6 +40,7 @@ export class ItemViewComponent implements OnInit {
   ngOnInit(): void {
     this.itemId = this.route.snapshot.params['itemId'];
     this.tenderFormId = this.route.snapshot.params['tenderFormId'];
+    this.tenderId = this.route.snapshot.params['tenderId'];
     this.getItemById(this.itemId);
     this.getAllItemRateByItemId(this.itemId);
   }

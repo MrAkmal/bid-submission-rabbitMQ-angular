@@ -1,3 +1,4 @@
+import { TenderFormComponent } from './views/tender-form/tender-form/tender-form.component';
 import { ItemViewComponent } from './views/item/item/view/item-view/item-view.component';
 import { ItemComponent } from './views/item/item/item.component';
 import { TenderComponent } from './views/tenders/tender/tender.component';
@@ -13,11 +14,15 @@ const routes: Routes = [
     component:TenderComponent
   },
   {
-    path:"tender/view/:tenderFormId/item",
+    path:"tender/view/:tenderId",
+    component:TenderFormComponent
+  },
+  {
+    path:"tender/view/:tenderId/:tenderFormId/item",
     component:ItemComponent
   },
   {
-    path:"item/view/:tenderFormId/:itemId",
+    path:"item/view/:tenderId/:tenderFormId/:itemId",
     component:ItemViewComponent
   }
 ];

@@ -1,1 +1,48 @@
-<p>tender-form-create works!</p>
+<button
+  (click)="showModalDialog()"
+  pButton
+  pRipple
+  type="button"
+  label="Add"
+  icon="pi pi-plus"
+  class="p-button p-button-primary p-button-sm"
+></button>
+<p-dialog
+  header="TenderForm Create"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '60vw', height: '40vh' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <form [formGroup]="tenderForm">
+    <br />
+    <div class="mb-3">
+      <div class="p-inputgroup">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            formControlName="name"
+            type="text"
+            pInputText
+          />
+          <label for="float-input">Name</label>
+        </span>
+      </div>
+    </div>
+    <br />
+  </form>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Save"
+      icon="pi pi-save"
+      (click)="save()"
+      class="p-button p-button-primary p-button-sm"
+      [loading]="isSaving"
+    ></button>
+  </ng-template>
+</p-dialog>
