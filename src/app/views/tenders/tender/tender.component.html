@@ -1,0 +1,33 @@
+<div class="container" style="padding-top: 2rem">
+  <br /><br />
+  <div class="row">
+    <div class="col-4 col-md-12">
+      <p-table [value]="tenders" sortMode="multiple">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="Id">#</th>
+            <th pSortableColumn="Description">Description</th>
+            <th pSortableColumn="View">View</th>
+            <th pSortableColumn="Settings" colspan="2">Settings</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tender let-rowIndex="rowIndex">
+          <tr scope="row">
+            <td>{{ rowIndex + 1 }}</td>
+            <td>{{ tender.description }}</td>
+            <td>
+              <button
+              [routerLink]="['/tender/view', tender.id]"
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-eye"
+                class="p-button-rounded p-button-primary p-button-sm"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
