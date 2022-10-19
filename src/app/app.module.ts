@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
+
 
 //componenets
 import { AppComponent } from './app.component';
@@ -21,7 +19,12 @@ import { ItemViewComponent } from './views/item/item/view/item-view/item-view.co
 import { ItemCreateComponent } from './views/item/item/create/item-create/item-create.component';
 import { ItemUpdateComponent } from './views/item/item/update/item-update/item-update.component';
 import { AuthComponent } from './views/auth/auth/auth.component';
-import { ItemRateComponent } from './views/item/item/rate/item-rate/item-rate.component';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { MessagesModule } from 'primeng/messages';
 
 
 //primeNg
@@ -73,9 +76,7 @@ import {TabViewModule} from 'primeng/tabview';
     InputTextModule,
     DropdownModule,
     ToastModule,
-    InputNumberModule,
-    TabMenuModule,
-    TabViewModule
+    InputNumberModule
 
   ],
   providers: [ConfirmationService, MessageService],
