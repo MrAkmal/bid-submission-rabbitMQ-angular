@@ -13,6 +13,7 @@
             <th pSortableColumn="Id">#</th>
             <th pSortableColumn="Description">Description</th>
             <th pSortableColumn="View">View</th>
+            <th pSortableColumn="Detail">Detail</th>
             <th pSortableColumn="Settings" colspan="2">Settings</th>
           </tr>
         </ng-template>
@@ -24,11 +25,21 @@
               <app-tender-view [tender]="tender"></app-tender-view>
             </td>
             <td>
+              <button
+              pButton
+              pRipple
+              type="button"
+              routerLink="/tender/view/{{ tender.id }}"
+              icon="pi pi-eye"
+              class="p-button-rounded p-button-primary p-button-sm"
+            ></button>
+            </td>
+            <td>
               <app-tender-update [tender]="tender"></app-tender-update>
-              
+
                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
                (click)="showdeleteModal(tender.id)"></button>
-             
+
                <div style="text-align: center">
                 <p-toast
                   position="bottom-center"
@@ -72,7 +83,7 @@
               </div>
 
 
-<!--               
+<!--
                 <div> Are you sure ?</div>
 
                 <ng-template let-message pTemplate="message">

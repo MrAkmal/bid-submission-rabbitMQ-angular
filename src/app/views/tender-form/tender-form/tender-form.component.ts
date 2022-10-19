@@ -3,6 +3,7 @@ import { TenderFormAPI } from 'src/app/api/tender-form/tender-form-api';
 import { TenderFormDTO } from './../../../interface/tender-form-interface';
 import { Component, Input, OnInit } from '@angular/core';
 import { TenderDTO } from 'src/app/interface/tender-interface';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { TenderDTO } from 'src/app/interface/tender-interface';
 })
 export class TenderFormComponent implements OnInit {
 
-  tenderId: number = 1;
+  tenderId!: number;
 
   tenderForms: TenderFormDTO[] = [];
 
@@ -23,10 +24,11 @@ export class TenderFormComponent implements OnInit {
 
   isLoaded: boolean = false;
 
-  constructor(private tenderApi: TenderAPI,
+  constructor(private tenderApi: TenderAPI, private route: ActivatedRoute,
     private tenderFormApi: TenderFormAPI) { }
 
   ngOnInit(): void {
+    this.tenderId = this.route.snapshot.params['tenderId'];
     this.getAllTenderFormByTenderId(this.tenderId);
     this.getTenderById(this.tenderId);
   }

@@ -23,7 +23,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ItemRateComponent } from './views/item/item/rate/item-rate/item-rate.component';
 import { MessagesModule } from 'primeng/messages';
 
 
@@ -76,7 +76,11 @@ import {TabViewModule} from 'primeng/tabview';
     InputTextModule,
     DropdownModule,
     ToastModule,
-    InputNumberModule
+    InputNumberModule,
+    TabViewModule,
+    TabMenuModule,
+    ConfirmDialogModule,
+    MessagesModule
 
   ],
   providers: [ConfirmationService, MessageService],
