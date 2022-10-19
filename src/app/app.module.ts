@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
+
 
 //componenets
 import { AppComponent } from './app.component';
@@ -23,7 +21,6 @@ import { ItemUpdateComponent } from './views/item/item/update/item-update/item-u
 import { AuthComponent } from './views/auth/auth/auth.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ToastModule} from 'primeng/toast';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -89,7 +86,6 @@ import { ItemRateComponent } from './views/item/item/rate/item-rate/item-rate.co
 
   ],
   providers: [ConfirmationService, MessageService],
-  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
