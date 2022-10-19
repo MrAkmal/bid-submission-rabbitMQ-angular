@@ -1,3 +1,5 @@
+import { ItemDTO } from 'src/app/interface/item-interface';
+import { ItemAPI } from 'src/app/api/item/item-api';
 import { TenderAPI } from './../../../api/tender/tender-api';
 import { TenderFormAPI } from 'src/app/api/tender-form/tender-form-api';
 import { TenderFormDTO } from './../../../interface/tender-form-interface';
@@ -17,6 +19,7 @@ export class TenderFormComponent implements OnInit {
   tenderId!: number;
 
   tenderForms: TenderFormDTO[] = [];
+  items: ItemDTO[] = [];
 
   tender: TenderDTO = {
     id: 0,
@@ -27,12 +30,30 @@ export class TenderFormComponent implements OnInit {
 
   constructor(private tenderApi: TenderAPI, private route: ActivatedRoute,
     private tenderFormApi: TenderFormAPI,
+    private itemApi: ItemAPI,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.tenderId = this.route.snapshot.params['tenderId'];
     this.getAllTenderFormByTenderId(this.tenderId);
     this.getTenderById(this.tenderId);
+    this.getAllRatedItemsByTenderId(this.tenderId);
+  }
+
+  getAllRatedItemsByTenderId(tenderId: number) {
+    this.itemApi.getAllByTenderId(tenderId)
+      .then(res => {
+        console.log(res);
+        this.items = res.data.data;
+
+      }).catch(error => {
+        console.log(error);
+        this.messageService.add({
+          severity: "error",
+          summary: error.response.status,
+          detail: error.response.data.message
+        });
+      })
   }
 
   getAllTenderFormByTenderId(tenderId: number) {
@@ -43,6 +64,14 @@ export class TenderFormComponent implements OnInit {
       }).catch(err => {
         console.log(err);
       })
+  }
+
+  calculateTotalRate():number {
+    let cost: number = this.items
+      .reduce(function (a, b) {
+        return a + b.rate;
+      }, 0);
+      return cost;
   }
 
   getTenderById(tenderId: number) {

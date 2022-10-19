@@ -1,1 +1,66 @@
-<p>tender-form-update works!</p>
+<button
+  (click)="showModalDialog()"
+  pButton
+  pRipple
+  type="button"
+  icon="pi pi-pencil"
+  class="p-button-rounded p-button-info p-button-sm"
+></button>
+<p-dialog
+  header="TenderForm Update"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '60vw', height: '70vh' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <form *ngIf="isLoaded" [formGroup]="tenderForm">
+    <br />
+    <div class="mb-3">
+      <div class="p-inputgroup">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            formControlName="name"
+            [(ngModel)]="name"
+            type="text"
+            pInputText
+          />
+          <label for="float-input">Name</label>
+        </span>
+      </div>
+    </div>
+    <br />
+    <div class="mb-3">
+      <span class="p-float-label">
+        <p-dropdown
+
+          [options]="tenders"
+          optionLabel="description"
+          dataKey="id"
+          [(ngModel)]="tenderIds"
+          optionValue="id"
+          [showClear]="true"
+          formControlName="tenderId"
+          [style]="{ width: '100%' }"
+        >
+        </p-dropdown>
+        <label for="dropdown">Select Tender</label>
+      </span>
+    </div>
+    <br />
+  </form>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Update"
+      icon="pi pi-refresh"
+      (click)="update()"
+      class="p-button p-button-primary p-button-sm"
+      [loading]="isUpdating"
+    ></button>
+  </ng-template>
+</p-dialog>

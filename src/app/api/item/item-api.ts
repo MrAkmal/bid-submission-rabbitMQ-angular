@@ -19,7 +19,7 @@ export class ItemAPI {
   async getAllByTenderId(tenderId: number) {
 
     // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = 2;
 
     return await axios.get(this.baseUrl + '/rate/' + tenderId + '?userId=' + userId);
 

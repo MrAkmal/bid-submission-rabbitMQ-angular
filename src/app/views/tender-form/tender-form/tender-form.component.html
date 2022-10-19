@@ -56,6 +56,10 @@
                   ></button>
                 </td>
                 <td>
+                  <app-tender-form-update
+                    [tenderId]="tenderId"
+                    [tenderFormId]="tenderForm.id"
+                  ></app-tender-form-update>
                   <button
                     pButton
                     pRipple
@@ -118,6 +122,61 @@
         </div>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="TenderItems"> Content 2 </p-tabPanel>
+    <p-tabPanel header="TenderItems">
+      <div class="row">
+        <div class="col-4 col-md-12">
+          <p-table [value]="items" sortMode="multiple">
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="Id">#</th>
+                <th pSortableColumn="Name">Name</th>
+                <th pSortableColumn="Description">Description</th>
+                <th pSortableColumn="Quantity">Quantity</th>
+                <th pSortableColumn="Rate">Rate</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+              <tr scope="row">
+                <td>{{ rowIndex + 1 }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.rate }}</td>
+              </tr>
+            </ng-template>
+            <ng-template  pTemplate="footer">
+              <tr scope="row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Toatl Rate</td>
+                <td>{{ calculateTotalRate() }}</td>
+              </tr>
+              <tr scope="row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    label="Sum Up"
+                    style="float: right"
+                    class="p-button p-button-primary p-button-sm"
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr scope="row">
+                <td colspan="5" style="text-align: center">No Data</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </p-tabPanel>
   </p-tabView>
 </div>
