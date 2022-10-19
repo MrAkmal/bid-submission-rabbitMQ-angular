@@ -1,1 +1,102 @@
-<p>item-update works!</p>
+<button
+  pButton
+  pRipple
+  (click)="showModalDialog()"
+  type="button"
+  icon="pi pi-pencil"
+  class="p-button-rounded p-button-primary p-button-sm"
+></button>
+<p-dialog
+  header="Item Update"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '60vw', height: '100vh' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <form *ngIf="isLoaded" [formGroup]="itemForm">
+    <br />
+    <div class="mb-3">
+      <div class="p-inputgroup">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            formControlName="name"
+            [(ngModel)]="name"
+            type="text"
+            pInputText
+          />
+          <label for="float-input">Name</label>
+        </span>
+      </div>
+    </div>
+    <br />
+    <div class="mb-3">
+      <div class="p-inputgroup">
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            formControlName="description"
+            [(ngModel)]="description"
+            type="text"
+            pInputText
+          />
+          <label for="float-input">Description</label>
+        </span>
+      </div>
+    </div>
+    <br />
+    <div class="mb-3">
+      <div class="p-inputgroup">
+        <span class="p-float-label">
+          <p-inputNumber
+            [showButtons]="true"
+            formControlName="quantity"
+            buttonLayout="horizontal"
+            inputId="horizontal"
+            spinnerMode="horizontal"
+            [step]="1"
+            [min]="0"
+            decrementButtonClass="p-button-danger"
+            incrementButtonClass="p-button-success"
+            incrementButtonIcon="pi pi-plus"
+            [(ngModel)]="quantity"
+            decrementButtonIcon="pi pi-minus"
+          >
+          </p-inputNumber>
+          <label for="float-input">Quantity</label>
+        </span>
+      </div>
+    </div>
+    <br />
+    <div class="mb-3">
+      <span class="p-float-label">
+        <p-dropdown
+          inputId="dropdown"
+          formControlName="tenderFormId"
+          [autoDisplayFirst]="false"
+          [options]="tenderForms"
+          optionLabel="name"
+          optionValue="id"
+          [style]="{ width: '100%' }"
+        >
+        </p-dropdown>
+        <label for="dropdown">Select Tender Form</label>
+      </span>
+    </div>
+    <br />
+  </form>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Update"
+      icon="pi pi-refresh"
+      (click)="update()"
+      class="p-button p-button-info p-button-sm"
+      [loading]="isUpdating"
+    ></button>
+  </ng-template>
+</p-dialog>

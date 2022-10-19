@@ -1,28 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 //componenets
 import { AppComponent } from './app.component';
 import { TenderComponent } from './views/tenders/tender/tender.component';
 import { NavbarComponent } from './views/navbar/navbar/navbar.component';
-
-//primeNg
-import { MenubarModule } from 'primeng/menubar';
-import { TableModule } from 'primeng/table'
-import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
-import { DialogModule } from 'primeng/dialog';
-import { AccordionModule } from 'primeng/accordion';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import {CardModule} from 'primeng/card';
-import {SkeletonModule} from 'primeng/skeleton';
-import {BadgeModule} from 'primeng/badge';
-import {EditorModule} from 'primeng/editor';
-import { InputTextModule } from 'primeng/inputtext';
-
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { TenderViewComponent } from './views/tenders/tender/view/tender-view/tender-view.component';
 import { TenderCreateComponent } from './views/tenders/tender/create/tender-create/tender-create.component';
 import { TenderUpdateComponent } from './views/tenders/tender/update/tender-update/tender-update.component';
@@ -44,9 +30,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MessagesModule } from 'primeng/messages';
 
 
+//primeNg
+import { MenubarModule } from 'primeng/menubar';
+import { TableModule } from 'primeng/table'
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { AccordionModule } from 'primeng/accordion';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+import {InputNumberModule} from 'primeng/inputnumber';
+import { ItemRateComponent } from './views/item/item/rate/item-rate/item-rate.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+
     TenderComponent,
     NavbarComponent,
     TenderViewComponent,
@@ -60,10 +60,14 @@ import { MessagesModule } from 'primeng/messages';
     ItemViewComponent,
     ItemCreateComponent,
     ItemUpdateComponent,
-    AuthComponent
+    AuthComponent,
+    ItemRateComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ConfirmDialogModule,
     MessagesModule,
@@ -75,9 +79,16 @@ import { MessagesModule } from 'primeng/messages';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    AccordionModule,
+    DialogModule,
+    InputTextModule,
+    DropdownModule,
+    ToastModule,
+    InputNumberModule
 
   ],
+  providers: [ConfirmationService, MessageService],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
