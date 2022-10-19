@@ -53,7 +53,7 @@ export class TenderFormAPI {
     // let userId = localStorage.getItem("userId");
     let userId = 1;
 
-    return await axios.put(this.baseUrl + '/' + tenderFormId + '?userId=' + userId);
+    return await axios.delete(this.baseUrl + '/' + tenderFormId + '?userId=' + userId);
 
   }
 
