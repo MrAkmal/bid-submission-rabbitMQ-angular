@@ -29,6 +29,11 @@ export class TenderFormComponent implements OnInit {
   isLoaded: boolean = false;
   isRating:boolean=false;
 
+  canCreate:boolean=false;
+  canUpdate:boolean=false;
+  canDelete:boolean=false;
+  canSumUp:boolean=false;
+
   constructor(private tenderApi: TenderAPI, private route: ActivatedRoute,
     private tenderFormApi: TenderFormAPI,
     private itemApi: ItemAPI,
@@ -36,9 +41,20 @@ export class TenderFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.tenderId = this.route.snapshot.params['tenderId'];
+    this.checkPermission();
     this.getAllTenderFormByTenderId(this.tenderId);
     this.getTenderById(this.tenderId);
     this.getAllRatedItemsByTenderId(this.tenderId);
+  }
+
+  checkPermission(){
+    if(localStorage.getItem("role")==='ROLE_AGENCY_USER'){
+      this.canCreate=true;
+      this.canUpdate=true;
+      this.canDelete=true;
+    }else if(localStorage.getItem("role")!=='ROLE_AGENCY_USER'){
+      this.canSumUp=true;
+    }
   }
 
   getAllRatedItemsByTenderId(tenderId: number) {
@@ -49,11 +65,11 @@ export class TenderFormComponent implements OnInit {
 
       }).catch(error => {
         console.log(error);
-        this.messageService.add({
-          severity: "error",
-          summary: error.response.status,
-          detail: error.response.data.message
-        });
+        // this.messageService.add({
+        //   severity: "error",
+        //   summary: error.response.status,
+        //   detail: error.response.data.message
+        // });
       })
   }
 

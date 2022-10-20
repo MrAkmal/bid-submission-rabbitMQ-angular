@@ -28,6 +28,11 @@ export class ItemComponent implements OnInit {
     name: ''
   };
 
+  canCreate:boolean=false;
+  canUpdate:boolean=false;
+  canDelete:boolean=false;
+  canRate:boolean=false;
+
   constructor(private itemApi: ItemAPI,
     private route: ActivatedRoute,
     private router: Router,
@@ -37,8 +42,19 @@ export class ItemComponent implements OnInit {
   ngOnInit(): void {
     this.tenderId = this.route.snapshot.params['tenderId'];
     this.tenderFormId = this.route.snapshot.params['tenderFormId'];
+    this.checkPermission();
     this.getAllByTenderFormId(this.tenderFormId);
     this.getTenderFormById(this.tenderFormId);
+  }
+
+  checkPermission(){
+    if(localStorage.getItem("role")==='ROLE_AGENCY_USER'){
+      this.canCreate=true;
+      this.canUpdate=true;
+      this.canDelete=true;
+    }else if(localStorage.getItem("role")!=='ROLE_AGENCY_USER'){
+      this.canRate=true;
+    }
   }
 
   getTenderFormById(tenderFormId: number) {

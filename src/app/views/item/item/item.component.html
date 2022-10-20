@@ -18,7 +18,7 @@
   icon="pi pi-arrow-left"
   class="p-button p-button-success p-button-sm"
 ></button>
-  <app-item-create [tenderFormId]="tenderFormId"></app-item-create>
+  <app-item-create [tenderFormId]="tenderFormId" *ngIf="canCreate"></app-item-create>
   <br /><br />
   <div class="row">
     <div class="col-4 col-md-12">
@@ -51,17 +51,18 @@
               ></button>
             </td>
             <td>
-              <app-item-rate [itemId]="item.id" [tenderFormId]="tenderFormId">
+              <app-item-rate [itemId]="item.id" [tenderFormId]="tenderFormId" *ngIf="canRate">
               </app-item-rate>
             </td>
             <td>
               <app-item-update
                 [tenderFormId]="tenderFormId"
                 [itemId]="item.id"
-                [tenderId]="tenderId"
+                [tenderId]="tenderId" *ngIf="canUpdate"
               ></app-item-update>
 
               <button
+              *ngIf="canDelete"
                 pButton
                 pRipple
                 type="button"

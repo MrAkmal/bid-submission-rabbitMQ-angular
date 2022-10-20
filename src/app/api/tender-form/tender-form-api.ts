@@ -31,8 +31,7 @@ export class TenderFormAPI {
 
   async create(dto: TenderFormCreateDTO) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = localStorage.getItem("userId");
 
     return await axios.post(this.baseUrl + '?userId=' + userId, dto);
 
@@ -40,8 +39,7 @@ export class TenderFormAPI {
 
   async update(dto: TenderFormUpdateDTO) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = localStorage.getItem("userId");
 
     return await axios.put(this.baseUrl + '?userId=' + userId, dto);
 
@@ -50,8 +48,7 @@ export class TenderFormAPI {
 
   async delete(tenderFormId: number) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = localStorage.getItem("userId");
 
     return await axios.delete(this.baseUrl + '/' + tenderFormId + '?userId=' + userId);
 

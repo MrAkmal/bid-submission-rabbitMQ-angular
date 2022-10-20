@@ -14,12 +14,11 @@ export class ItemAPI {
 
   constructor() {
   }
-
+  
 
   async getAllByTenderId(tenderId: number) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 2;
+    let userId = localStorage.getItem("userId");
 
     return await axios.get(this.baseUrl + '/rate/' + tenderId + '?userId=' + userId);
 
@@ -35,8 +34,7 @@ export class ItemAPI {
 
   async create(dto: ItemCreateDTO) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = localStorage.getItem("userId");
 
     return await axios.post(this.baseUrl + '?userId=' + userId, dto);
 
@@ -45,8 +43,7 @@ export class ItemAPI {
 
   async update(dto: ItemUpdateDTO) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = localStorage.getItem("userId");
 
     return await axios.put(this.baseUrl + '?userId=' + userId, dto);
 
@@ -55,8 +52,7 @@ export class ItemAPI {
 
   async delete(itemId: number) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = localStorage.getItem("userId");
 
     return await axios.delete(this.baseUrl + '/' + itemId + '?userId=' + userId);
 
@@ -65,8 +61,7 @@ export class ItemAPI {
 
   async rate(dto: ItemRateCreateDTO) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 2;
+    let userId = localStorage.getItem("userId");
 
     return await axios.post(this.baseUrl + '?userId=' + userId, dto);
 
@@ -75,8 +70,7 @@ export class ItemAPI {
 
   async rateSumUp(tenderId: number) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 2;
+    let userId = localStorage.getItem("userId");
 
     return await axios.post(this.baseUrl + '/' + tenderId + '?userId=' + userId);
 
@@ -85,8 +79,7 @@ export class ItemAPI {
 
   async getAllByTenderFormId(tenderFormId: number) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 2;
+    let userId = localStorage.getItem("userId");
 
     return await axios.get(this.baseUrl + '/tender_form/' + tenderFormId + '?userId=' + userId);
 
@@ -95,8 +88,7 @@ export class ItemAPI {
 
   async getAllItemRateByItemId(itemId: number) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = localStorage.getItem("userId");
 
     return await axios.get(this.baseUrl + '/item_rate/' + itemId + '?userId=' + userId);
 
@@ -104,8 +96,7 @@ export class ItemAPI {
 
   async rateItem(dto: ItemRateCreateDTO) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 1;
+    let userId = localStorage.getItem("userId");
 
     return await axios.post(this.baseUrl + '/rate/?userId=' + userId, dto);
 
@@ -114,8 +105,7 @@ export class ItemAPI {
 
   async rateSumUpTender(tenderId: number) {
 
-    // let userId = localStorage.getItem("userId");
-    let userId = 2;
+    let userId = localStorage.getItem("userId");
 
     return await axios.post(this.baseUrl + '/rate/sum-up/' + tenderId + '?userId=' + userId);
 

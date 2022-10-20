@@ -1,1 +1,35 @@
-<p>auth works!</p>
+<div class="container">
+  <div class="row" style="padding: 2rem">
+    <div
+      class="col-12 col-md-6"
+      style="border: 2px solid #efefef; padding: 1rem; border-radius: 10px"
+    >
+      <form [formGroup]="loginForm">
+        <br />
+        <div class="mb-3">
+          <div class="p-inputgroup">
+            <span class="p-float-label">
+              <input
+                id="float-input"
+                formControlName="username"
+                type="text"
+                pInputText
+              />
+              <label for="float-input">Username</label>
+            </span>
+          </div>
+        </div>
+        <br />
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Login"
+          (click)="login()"
+          [loading]="isLogin"
+          class="p-button p-button-primary p-button-sm"
+        ></button>
+      </form>
+    </div>
+  </div>
+</div>

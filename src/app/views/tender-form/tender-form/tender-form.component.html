@@ -20,7 +20,7 @@
     icon="pi pi-arrow-left"
     class="p-button p-button-success p-button-sm"
   ></button>
-  <app-tender-form-create [tenderId]="tenderId"></app-tender-form-create>
+  <app-tender-form-create [tenderId]="tenderId" *ngIf="canCreate"></app-tender-form-create>
   <br /><br />
   <p-tabView>
     <p-tabPanel header="TenderForms" [selected]="true">
@@ -56,11 +56,11 @@
                   ></button>
                 </td>
                 <td>
-                  <app-tender-form-update
+                  <app-tender-form-update *ngIf="canUpdate"
                     [tenderId]="tenderId"
                     [tenderFormId]="tenderForm.id"
                   ></app-tender-form-update>
-                  <button
+                  <button *ngIf="canDelete"
                     pButton
                     pRipple
                     type="button"
@@ -122,7 +122,7 @@
         </div>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="TenderItems">
+    <p-tabPanel header="TenderItems" *ngIf="canSumUp">
       <div class="row">
         <div class="col-4 col-md-12">
           <p-table [value]="items" sortMode="multiple">

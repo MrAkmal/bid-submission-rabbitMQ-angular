@@ -1,3 +1,4 @@
+import { AuthComponent } from './views/auth/auth/auth.component';
 import { TenderFormComponent } from './views/tender-form/tender-form/tender-form.component';
 import { ItemViewComponent } from './views/item/item/view/item-view/item-view.component';
 import { ItemComponent } from './views/item/item/item.component';
@@ -6,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+
   {
     path: '', redirectTo: 'tender', pathMatch: 'full'
   },
@@ -24,6 +26,10 @@ const routes: Routes = [
   {
     path:"item/view/:tenderId/:tenderFormId/:itemId",
     component:ItemViewComponent
+  },
+  {
+    path:"login",
+    component:AuthComponent
   }
 ];
 

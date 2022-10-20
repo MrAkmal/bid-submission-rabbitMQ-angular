@@ -2,7 +2,7 @@
 
 <div class="container" style="padding-top: 2rem">
 
-  <app-tender-create></app-tender-create>
+  <app-tender-create *ngIf="canCreate"></app-tender-create>
 
   <br /><br />
   <div class="row">
@@ -35,10 +35,10 @@
             ></button>
             </td>
             <td>
-              <app-tender-update [tender]="tender"></app-tender-update>
+              <app-tender-update [tender]="tender" *ngIf="canUpdate"></app-tender-update>
 
                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
-               (click)="showdeleteModal(tender.id)"></button>
+               (click)="showdeleteModal(tender.id)" *ngIf="canDelete"></button>
 
                <div style="text-align: center">
                 <p-toast

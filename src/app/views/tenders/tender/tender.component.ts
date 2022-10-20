@@ -4,6 +4,8 @@ import { TenderAPI } from './../../../api/tender/tender-api';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthAPI } from 'src/app/api/auth/auth-api';
 
 @Component({
   selector: 'app-tender',
@@ -11,6 +13,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./tender.component.css']
 })
 export class TenderComponent implements OnInit {
+
+
+  canCreate:boolean=false;
+  canUpdate:boolean=false;
+  canDelete:boolean=false;
 
   tenders: TenderDTO[] = [];
 
@@ -30,6 +37,15 @@ export class TenderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTender();
+    this.checkPermission();
+  }
+
+  checkPermission(){
+    if(localStorage.getItem("role")==='ROLE_AGENCY_USER'){
+      this.canCreate=true;
+      this.canUpdate=true;
+      this.canDelete=true;
+    }
   }
 
   getAllTender() {
@@ -167,9 +183,9 @@ export class TenderComponent implements OnInit {
 
   deleteModal: boolean = false;
 
-  
+
   showdeleteModal(tenderId:number){
-    
+
     this.messageService.clear();
     this.messageService.add({
       key: 'c', sticky: true,
