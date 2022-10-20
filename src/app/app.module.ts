@@ -40,7 +40,8 @@ import { ToastModule } from 'primeng/toast';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {TabViewModule} from 'primeng/tabview';
-
+import { NotificationComponent } from './views/notification/notification/notification.component';
+import {BadgeModule} from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {TabViewModule} from 'primeng/tabview';
     ItemCreateComponent,
     ItemUpdateComponent,
     AuthComponent,
-    ItemRateComponent
+    ItemRateComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import {TabViewModule} from 'primeng/tabview';
     TabViewModule,
     TabMenuModule,
     ConfirmDialogModule,
-    MessagesModule
+    MessagesModule,
+    BadgeModule
 
   ],
   providers: [ConfirmationService, MessageService],

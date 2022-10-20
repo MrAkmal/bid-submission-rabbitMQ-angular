@@ -10,6 +10,8 @@ import { MenuItem } from 'primeng/api';
 export class NavbarComponent implements OnInit {
 
   menuItems: MenuItem[] = [];
+  isLogged:boolean=false;
+  isAgencyUser:boolean=false;
 
   constructor(private authApi: AuthAPI) { }
 
@@ -17,9 +19,14 @@ export class NavbarComponent implements OnInit {
     this.getMenu();
   }
 
+
   getMenu() {
     let userId = localStorage.getItem("userId");
     if (userId) {
+      this.isLogged=true;
+      if(localStorage.getItem("role")==='ROLE_AGENCY_USER'){
+        this.isAgencyUser=true;
+      }
       this.menuItems = [
         {
           label: 'Tenders',

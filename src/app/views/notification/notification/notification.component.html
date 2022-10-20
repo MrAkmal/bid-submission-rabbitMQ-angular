@@ -1,0 +1,31 @@
+<div class="grid gap-3" style="padding-right: 1rem">
+  <i
+    (click)="showNotification()"
+    class="pi pi-bell mr-4 p-text-danger"
+    pBadge
+    style="font-size: 2rem"
+    value="{{notifications.length}}"
+  ></i>
+</div>
+<p-dialog
+  header="Notifications"
+  [(visible)]="notificationDisplay"
+  [position]="position"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  [blockScroll]="true"
+>
+  <ul class="list-group" *ngFor="let dto of notifications">
+    <li
+      class="list-group-item"
+      style="background-color: #ccdff5; font-weight: bold"
+    >
+      TotalRate : {{ dto.totalRate }} BidderId : {{ dto.userId }} TenderId :
+      {{ dto.tenderId }} SubmissionDateTime : {{ dto.submissionDateTime }}
+    </li>
+    <br />
+  </ul>
+</p-dialog>
