@@ -14,7 +14,7 @@ export class ItemAPI {
 
   constructor() {
   }
-  
+
 
   async getAllByTenderId(tenderId: number) {
 
