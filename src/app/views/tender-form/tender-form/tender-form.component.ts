@@ -27,6 +27,7 @@ export class TenderFormComponent implements OnInit {
   };
 
   isLoaded: boolean = false;
+  isRating:boolean=false;
 
   constructor(private tenderApi: TenderAPI, private route: ActivatedRoute,
     private tenderFormApi: TenderFormAPI,
@@ -66,12 +67,12 @@ export class TenderFormComponent implements OnInit {
       })
   }
 
-  calculateTotalRate():number {
+  calculateTotalRate(): number {
     let cost: number = this.items
       .reduce(function (a, b) {
         return a + b.rate;
       }, 0);
-      return cost;
+    return cost;
   }
 
   getTenderById(tenderId: number) {
@@ -124,6 +125,28 @@ export class TenderFormComponent implements OnInit {
       summary: "Cancelled",
       detail: "Deleteing Cancelled"
     });
+  }
+
+  sumUpRate(tenderId: number) {
+    this.isRating=true;
+    this.itemApi.rateSumUpTender(tenderId)
+      .then(res => {
+        console.log(res);
+        this.messageService.add({
+          severity: "success",
+          summary: "" + res.status,
+          detail: res.data.message
+        });
+        this.isRating=false;
+      }).catch(error => {
+        console.log(error);
+        this.messageService.add({
+          severity: "error",
+          summary: error.response.status,
+          detail: error.response.data.message
+        });
+        this.isRating=false;
+      })
   }
 
 }

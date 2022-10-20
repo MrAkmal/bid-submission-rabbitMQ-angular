@@ -144,7 +144,7 @@
                 <td>{{ item.rate }}</td>
               </tr>
             </ng-template>
-            <ng-template  pTemplate="footer">
+            <ng-template pTemplate="footer">
               <tr scope="row">
                 <td></td>
                 <td></td>
@@ -159,7 +159,9 @@
                 <td></td>
                 <td>
                   <button
+                    (click)="sumUpRate(tenderId)"
                     pButton
+                    [loading]="isRating"
                     pRipple
                     type="button"
                     label="Sum Up"

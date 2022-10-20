@@ -112,6 +112,16 @@ export class ItemAPI {
   }
 
 
+  async rateSumUpTender(tenderId: number) {
+
+    // let userId = localStorage.getItem("userId");
+    let userId = 2;
+
+    return await axios.post(this.baseUrl + '/rate/sum-up/' + tenderId + '?userId=' + userId);
+
+  }
+
+
 
 }
 
