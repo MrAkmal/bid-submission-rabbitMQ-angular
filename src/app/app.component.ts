@@ -6,6 +6,9 @@ import { NotificationService } from './service/notification.service';
 import { WebsocketService } from './service/websocket.service';
 import { RabbitDTO } from './interface/auth-interface';
 
+import { environment } from "../environments/environment";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+
 @Injectable({
   providedIn: "root"
 })
@@ -17,7 +20,7 @@ import { RabbitDTO } from './interface/auth-interface';
 })
 export class AppComponent implements OnInit {
   title = 'bid-submission-rabbitMQ-angular';
-
+  message:any = null;
 
   constructor(private messageService: MessageService,
     private notificationService: NotificationService,
@@ -34,6 +37,8 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem("userId") === null) {
       this.router.navigate(['/login']);
     } else if (localStorage.getItem("role") === 'ROLE_AGENCY_USER') {
+      this.requestPermission();
+      this.listen();
       this.connect();
     }
   }
@@ -60,10 +65,30 @@ export class AppComponent implements OnInit {
   }
 
 
+  //firebase
 
+  requestPermission() {
+    const messaging = getMessaging();
+    getToken(messaging,
+     { vapidKey: environment.firebase.vapidKey}).then(
+       (currentToken) => {
+         if (currentToken) {
+           console.log("Hurraaa!!! we got the token.....");
+           console.log(currentToken);
+         } else {
+           console.log('No registration token available. Request permission to generate one.');
+         }
+     }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+    });
+  }
 
-
-
-
+  listen() {
+    const messaging = getMessaging();
+    onMessage(messaging, (payload) => {
+      console.log('Message received. ', payload);
+      this.message=payload;
+    });
+  }
 
 }

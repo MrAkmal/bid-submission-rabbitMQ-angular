@@ -43,6 +43,10 @@ import {TabViewModule} from 'primeng/tabview';
 import { NotificationComponent } from './views/notification/notification/notification.component';
 import {BadgeModule} from 'primeng/badge';
 
+import { environment } from "../environments/environment";
+import { initializeApp } from "firebase/app";
+initializeApp(environment.firebase);
+
 @NgModule({
   declarations: [
     AppComponent,
