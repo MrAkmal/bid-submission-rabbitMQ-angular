@@ -32,7 +32,7 @@
                 <th pSortableColumn="Id">#</th>
                 <th pSortableColumn="Name">Name</th>
                 <th pSortableColumn="View">View</th>
-                <th pSortableColumn="Settings" colspan="2">Settings</th>
+                <th pSortableColumn="Settings" colspan="2" *ngIf="canUpdate && canDelete">Settings</th>
               </tr>
             </ng-template>
             <ng-template
@@ -55,7 +55,7 @@
                     class="p-button-rounded p-button-primary p-button-sm"
                   ></button>
                 </td>
-                <td>
+                <td *ngIf="canUpdate && canDelete">
                   <app-tender-form-update *ngIf="canUpdate"
                     [tenderId]="tenderId"
                     [tenderFormId]="tenderForm.id"
