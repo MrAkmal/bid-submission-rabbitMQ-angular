@@ -40,10 +40,23 @@ export class AppComponent implements OnInit {
 
   connect(): void {
     this.websocketService.connect();
+    this.notify();
   }
 
   disconnect(): void {
     this.websocketService.disconnect();
+  }
+
+  notify(): void {
+    this.notificationService.notificationMessage.subscribe((data) => {
+      console.log('receive message', data);
+      let dto: RabbitDTO = data;
+      this.messageService.add({
+        severity: "success",
+        summary: "Rated",
+        detail: "" + dto.totalRate + " | Tender : " + dto.tenderId + " | Bidder : " + dto.userId + " | Date : " + dto.submissionDateTime
+      });
+    });
   }
 
 
