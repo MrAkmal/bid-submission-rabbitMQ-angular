@@ -22,6 +22,8 @@ export class NotificationDetailComponent implements OnInit {
   @Input()
   tenderId!: number;
 
+  isLoaded:boolean=false;
+
   tender: TenderDTO = {
     id: 0,
     description: ''
@@ -102,6 +104,7 @@ export class NotificationDetailComponent implements OnInit {
         if (this.notification.click === false) {
           this.updateClick();
         }
+        this.isLoaded=true;
       }).catch(err => {
         console.log(err);
       });

@@ -20,7 +20,7 @@ import { getMessaging, getToken, onMessage } from "firebase/messaging";
 })
 export class AppComponent implements OnInit {
   title = 'bid-submission-rabbitMQ-angular';
-  message:any = null;
+  message: any = null;
 
   constructor(private messageService: MessageService,
     private notificationService: NotificationService,
@@ -55,13 +55,16 @@ export class AppComponent implements OnInit {
   notify(): void {
     this.notificationService.notificationMessage.subscribe((data) => {
       console.log('receive message', data);
-      let dto: NotificationDTO = data;
-      this.messageService.add({
-        severity: "success",
-        summary: "Rated",
-        detail: "" + dto.totalRate + " | Tender : " + dto.tenderId + " | Bidder : " + dto.bidderId + " | Date : " + dto.submissionDateTime
-      });
+      if (data !== 1) {
+        let dto: NotificationDTO = data;
+        this.messageService.add({
+          severity: "success",
+          summary: "Rated",
+          detail: "" + dto.totalRate + " | Tender : " + dto.tenderId + " | Bidder : " + dto.bidderId + " | Date : " + dto.submissionDateTime
+        });
+      }
     });
+
   }
 
 

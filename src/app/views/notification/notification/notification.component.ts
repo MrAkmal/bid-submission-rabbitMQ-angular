@@ -20,6 +20,7 @@ export class NotificationComponent implements OnInit {
 
   notifications: NotificationDTO[] = [];
 
+  count: number = 0;
 
 
   constructor(private notificationService: NotificationService, private router: Router, private notificationApi: NotificationAPI, private messageService: MessageService) {
@@ -41,8 +42,19 @@ export class NotificationComponent implements OnInit {
   notify(): void {
     this.notificationService.notificationMessage.subscribe((data) => {
       console.log('receive message', data);
-      this.notifications.unshift(data);
+
+      if (data!==1) {
+        this.notifications.unshift(data);
+        this.count += 1;
+      } else {
+        this.getAllNotification();
+      }
     });
+  }
+
+
+  isNotification(obj: any): obj is NotificationDTO {
+    return 'totalRate' in obj && 'bidderId' in obj && 'tenderId' in obj && 'click' in obj && 'submissionDateTime' in obj;
   }
 
 
@@ -51,7 +63,7 @@ export class NotificationComponent implements OnInit {
       .then(res => {
         console.log(res);
         this.notifications = res.data;
-        this.unRead();
+        this.count = this.unRead();
       }).catch(err => {
         console.log(err);
       })
@@ -84,7 +96,10 @@ export class NotificationComponent implements OnInit {
 
   notificationDetail(tenderId: number, bidderId: number) {
     this.notificationDisplay = false;
-    this.router.navigate(['/notification/view/' + tenderId + '/' + bidderId]);
+    console.log(tenderId,bidderId)
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/notification/view/' + tenderId + '/' + bidderId]);
+    });
   }
 
 }
