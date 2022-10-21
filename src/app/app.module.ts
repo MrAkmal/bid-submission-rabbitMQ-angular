@@ -42,10 +42,13 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import {TabViewModule} from 'primeng/tabview';
 import { NotificationComponent } from './views/notification/notification/notification.component';
 import {BadgeModule} from 'primeng/badge';
-
 import { environment } from "../environments/environment";
 import { initializeApp } from "firebase/app";
 initializeApp(environment.firebase);
+
+import {PanelMenuModule} from 'primeng/panelmenu';
+import { NotificationDetailComponent } from './views/notification/notification/notification-detail/notification-detail/notification-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ initializeApp(environment.firebase);
     ItemUpdateComponent,
     AuthComponent,
     ItemRateComponent,
-    NotificationComponent
+    NotificationComponent,
+    NotificationDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +91,8 @@ initializeApp(environment.firebase);
     TabMenuModule,
     ConfirmDialogModule,
     MessagesModule,
-    BadgeModule
+    BadgeModule,
+    PanelMenuModule
 
   ],
   providers: [ConfirmationService, MessageService],

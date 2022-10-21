@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { AuthAPI, LoginDTO } from 'src/app/api/auth/auth-api';
+import { AuthAPI } from 'src/app/api/auth/auth-api';
+import { LoginDTO } from 'src/app/interface/auth-interface';
 
 @Component({
   selector: 'app-auth',

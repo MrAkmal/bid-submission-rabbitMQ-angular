@@ -1,11 +1,12 @@
-export interface RabbitDTO {
+export interface LoginDTO {
 
-  totalRate: number;
+  name: string;
 
-  userId: number;
+}
 
-  tenderId: number;
 
-  submissionDateTime: string;
+export interface UserDTO {
+
+  name: string;
 
 }

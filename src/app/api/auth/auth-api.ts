@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { LoginDTO } from "src/app/interface/auth-interface";
 
 @Injectable({
   providedIn: "root"
@@ -22,6 +23,13 @@ export class AuthAPI {
 
   }
 
+
+  async get(userId:number) {
+
+    return await axios.get(this.baseUrl + '/'+userId);
+
+  }
+
   async logout() {
     localStorage.removeItem("userId");
     localStorage.removeItem("role");
@@ -36,12 +44,6 @@ export class AuthAPI {
    return localStorage.getItem("userId");
   }
 
-
-}
-
-export interface LoginDTO {
-
-  name: string;
 
 }
 

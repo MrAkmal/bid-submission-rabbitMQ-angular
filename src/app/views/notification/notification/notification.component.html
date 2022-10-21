@@ -4,7 +4,7 @@
     class="pi pi-bell mr-4 p-text-secondary"
     pBadge
     style="font-size: 2rem"
-    value="{{ notifications.length }}"
+    value="{{unRead()}}"
   ></i>
 </div>
 <p-dialog
@@ -19,24 +19,25 @@
   [blockScroll]="true"
 >
   <ul class="list-group" *ngFor="let dto of notifications">
-    <li
-      class="list-group-item"
-      style="
-        background-color: #50a1ff;
-        font-weight: bold;
-        color: #fff;
-        border: 1px solid #fff;
-      "
-    >
-      TotalRate : {{ dto.totalRate }}
-      <br />
-      BidderId : {{ dto.userId }}
-      <br />
-      TenderId :
-      {{ dto.tenderId }}
-      <br />
-      SubmissionDateTime : {{ dto.submissionDateTime }}
+    <li class="list-group-item" *ngIf="!dto.click" ngClass="notificationNew"
+    (click)="notificationDetail(dto.tenderId,dto.bidderId)">
+      Tender Id : {{ dto.tenderId }} Bidder Id : {{ dto.bidderId }} TotalRate :
+      {{ dto.totalRate }}
+      <i
+      class="pi pi-circle-fill"
+      style="padding-top: 0.3rem; float: right; color: rgb(126, 4, 148)"
+    ></i>
+      <span style="float: right;padding-right: 0.3rem;font-size: 10px;padding-top: 0.4rem;">{{
+        dateDifference(dto.submissionDateTime)
+      }}</span>
     </li>
-    <br />
+    <li class="list-group-item" *ngIf="dto.click" ngClass="notificationOld"
+    (click)="notificationDetail(dto.tenderId,dto.bidderId)">
+      Tender Id : {{ dto.tenderId }} Bidder Id : {{ dto.bidderId }} TotalRate :
+      {{ dto.totalRate }}
+      <span style="float: right;padding-right: 0.3rem;font-size: 10px;padding-top: 0.4rem;">{{
+        dateDifference(dto.submissionDateTime)
+      }}</span>
+    </li>
   </ul>
 </p-dialog>

@@ -1,10 +1,10 @@
+import { NotificationDTO } from './interface/notification-interface';
 import { AuthAPI } from 'src/app/api/auth/auth-api';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { Router } from '@angular/router';
 import { NotificationService } from './service/notification.service';
 import { WebsocketService } from './service/websocket.service';
-import { RabbitDTO } from './interface/auth-interface';
 
 import { environment } from "../environments/environment";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
@@ -37,8 +37,8 @@ export class AppComponent implements OnInit {
     if (localStorage.getItem("userId") === null) {
       this.router.navigate(['/login']);
     } else if (localStorage.getItem("role") === 'ROLE_AGENCY_USER') {
-      this.requestPermission();
-      this.listen();
+      // this.requestPermission();
+      // this.listen();
       this.connect();
     }
   }
@@ -55,11 +55,11 @@ export class AppComponent implements OnInit {
   notify(): void {
     this.notificationService.notificationMessage.subscribe((data) => {
       console.log('receive message', data);
-      let dto: RabbitDTO = data;
+      let dto: NotificationDTO = data;
       this.messageService.add({
         severity: "success",
         summary: "Rated",
-        detail: "" + dto.totalRate + " | Tender : " + dto.tenderId + " | Bidder : " + dto.userId + " | Date : " + dto.submissionDateTime
+        detail: "" + dto.totalRate + " | Tender : " + dto.tenderId + " | Bidder : " + dto.bidderId + " | Date : " + dto.submissionDateTime
       });
     });
   }
@@ -67,28 +67,28 @@ export class AppComponent implements OnInit {
 
   //firebase
 
-  requestPermission() {
-    const messaging = getMessaging();
-    getToken(messaging,
-     { vapidKey: environment.firebase.vapidKey}).then(
-       (currentToken) => {
-         if (currentToken) {
-           console.log("Hurraaa!!! we got the token.....");
-           console.log(currentToken);
-         } else {
-           console.log('No registration token available. Request permission to generate one.');
-         }
-     }).catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
-    });
-  }
+  // requestPermission() {
+  //   const messaging = getMessaging();
+  //   getToken(messaging,
+  //    { vapidKey: environment.firebase.vapidKey}).then(
+  //      (currentToken) => {
+  //        if (currentToken) {
+  //          console.log("Hurraaa!!! we got the token.....");
+  //          console.log(currentToken);
+  //        } else {
+  //          console.log('No registration token available. Request permission to generate one.');
+  //        }
+  //    }).catch((err) => {
+  //       console.log('An error occurred while retrieving token. ', err);
+  //   });
+  // }
 
-  listen() {
-    const messaging = getMessaging();
-    onMessage(messaging, (payload) => {
-      console.log('Message received. ', payload);
-      this.message=payload;
-    });
-  }
+  // listen() {
+  //   const messaging = getMessaging();
+  //   onMessage(messaging, (payload) => {
+  //     console.log('Message received. ', payload);
+  //     this.message=payload;
+  //   });
+  // }
 
 }
